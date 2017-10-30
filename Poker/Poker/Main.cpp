@@ -255,7 +255,7 @@ string howManyOfAKind(int* arr)
 
 	if (firstGroup == 3 || secondGroup == 3)
 	{
-		return "Four of a Kind";
+		return "Four of A Kind";
 	}
 	else if ((firstGroup == 2 && secondGroup == 1) || (firstGroup == 1 && secondGroup == 2))
 	{
@@ -613,6 +613,22 @@ void assignCardsToPlayer(deck_list* list, string newCards, card* playerCards)
 	}
 }
 
+string filterCardsToKeep(string oldCards)
+{
+	string allCards = "abcde";
+	string cardToKeep = "";
+
+	for (unsigned int i = 0; i < allCards.length(); ++i)
+	{
+		if (oldCards.find(allCards[i]) == -1)
+		{
+			cardToKeep += allCards[i];
+		}
+	}
+
+	return cardToKeep;
+}
+
 int main()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF |
@@ -688,8 +704,7 @@ int main()
 			{
 				if (checkChoice(inputChoice))
 				{
-					cout << inputChoice << endl;
-					assignCardsToPlayer(list, inputChoice, playerCards);
+					assignCardsToPlayer(list, filterCardsToKeep(inputChoice), playerCards);
 					cardsInHand(playerCards);
 					checkGameForMoney(playerCards, money);
 					break;
